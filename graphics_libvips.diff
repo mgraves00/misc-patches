@@ -1,5 +1,11 @@
---- Makefile.orig	Sun Dec 11 19:12:49 2022
-+++ Makefile	Sun Dec 11 19:13:49 2022
+? libvips-8.13.0p0.log
+Index: Makefile
+===================================================================
+RCS file: /cvs/ports/graphics/libvips/Makefile,v
+retrieving revision 1.3
+diff -u -p -u -p -r1.3 Makefile
+--- Makefile	5 Nov 2022 17:06:27 -0000	1.3
++++ Makefile	12 Dec 2022 15:31:35 -0000
 @@ -1,6 +1,6 @@
  COMMENT =	fast image processing library with low memory needs
  
@@ -7,135 +13,34 @@
 +VERSION =	8.13.0
  DISTNAME =	vips-${VERSION}
  PKGNAME =	lib${DISTNAME}
+ REVISION =	0
+@@ -18,7 +18,7 @@ MAINTAINER =	Stephane Guedon <stephane@2
+ PERMIT_PACKAGE =	Yes
  
---- distinfo.orig	Sun Dec 11 19:12:59 2022
-+++ distinfo	Sun Dec 11 19:14:31 2022
+ WANTLIB += ${COMPILER_LIBCXX} c expat ffi gif glib-2.0 gmodule-2.0
+-WANTLIB += gobject-2.0 gthread-2.0 iconv intl jpeg lzma m pcre2-8
++WANTLIB += gobject-2.0 iconv intl jpeg lzma m pcre2-8
+ WANTLIB += png tiff webp webpdemux webpmux z zstd
+ 
+ MASTER_SITES =	https://github.com/libvips/libvips/releases/download/v${VERSION}/
+Index: distinfo
+===================================================================
+RCS file: /cvs/ports/graphics/libvips/distinfo,v
+retrieving revision 1.1.1.1
+diff -u -p -u -p -r1.1.1.1 distinfo
+--- distinfo	15 May 2020 07:58:41 -0000	1.1.1.1
++++ distinfo	12 Dec 2022 15:31:35 -0000
 @@ -1,2 +1,2 @@
 -SHA256 (vips-8.9.2.tar.gz) = roSRsRVs0uucu6ov1sqh3J7T3tC3BEPSjNf+p5irKic=
 -SIZE (vips-8.9.2.tar.gz) = 17238831
 +SHA256 (vips-8.13.0.tar.gz) = t+HVDc9XEWW+7NNq3s5uymcBwqnhMcZ1FD2LlBjb3YE=
 +SIZE (vips-8.13.0.tar.gz) = 17892132
---- pkg/PLIST.orig	Sun Dec 11 19:13:20 2022
-+++ pkg/PLIST	Sun Dec 11 19:30:08 2022
-@@ -4,7 +4,7 @@
- bin/light_correct
- bin/shrink_width
- @bin bin/vips
--bin/vips-8.9
-+bin/vips-8.13
- @bin bin/vipsedit
- @bin bin/vipsheader
- bin/vipsprofile
-@@ -14,11 +14,11 @@
- include/vips/VError8.h
- include/vips/VImage8.h
- include/vips/VInterpolate8.h
-+include/vips/VRegion8.h
- include/vips/almostdeprecated.h
- include/vips/arithmetic.h
- include/vips/basic.h
- include/vips/buf.h
--include/vips/cimg_funcs.h
- include/vips/colour.h
- include/vips/connection.h
- include/vips/conversion.h
-@@ -53,7 +53,6 @@
- include/vips/resample.h
- include/vips/sbuf.h
- include/vips/semaphore.h
--include/vips/soname.h
- include/vips/thread.h
- include/vips/threadpool.h
- include/vips/transform.h
-@@ -62,7 +61,6 @@
- include/vips/vector.h
- include/vips/version.h
- include/vips/video.h
--include/vips/vips-operators.h
- include/vips/vips.h
- include/vips/vips7compat.h
- include/vips/vips8
-@@ -86,16 +84,16 @@
- share/gtk-doc/
- share/gtk-doc/html/
- share/gtk-doc/html/libvips/
--share/gtk-doc/html/libvips/Cite.md.html
-+share/gtk-doc/html/libvips/Cite.html
- share/gtk-doc/html/libvips/Combine.png
--share/gtk-doc/html/libvips/Examples.md.html
--share/gtk-doc/html/libvips/How-it-opens-files.md.html
--share/gtk-doc/html/libvips/How-it-works.md.html
--share/gtk-doc/html/libvips/Making-image-pyramids.md.html
-+share/gtk-doc/html/libvips/Examples.html
-+share/gtk-doc/html/libvips/How-it-opens-files.html
-+share/gtk-doc/html/libvips/How-it-works.html
-+share/gtk-doc/html/libvips/Making-image-pyramids.html
- share/gtk-doc/html/libvips/Memtrace.png
- share/gtk-doc/html/libvips/Sequence.png
- share/gtk-doc/html/libvips/Sink.png
--share/gtk-doc/html/libvips/Using-vipsthumbnail.md.html
-+share/gtk-doc/html/libvips/Using-vipsthumbnail.html
- share/gtk-doc/html/libvips/Vips-smp.png
- share/gtk-doc/html/libvips/VipsForeignSave.html
- share/gtk-doc/html/libvips/VipsImage.html
-@@ -108,23 +106,14 @@
- share/gtk-doc/html/libvips/VipsThreadState.html
- share/gtk-doc/html/libvips/annotation-glossary.html
- share/gtk-doc/html/libvips/api-index-full.html
--share/gtk-doc/html/libvips/binding.md.html
-+share/gtk-doc/html/libvips/binding.html
- share/gtk-doc/html/libvips/ch01.html
- share/gtk-doc/html/libvips/ch02.html
- share/gtk-doc/html/libvips/ch03.html
- share/gtk-doc/html/libvips/ch04.html
--share/gtk-doc/html/libvips/colour-management.html
--share/gtk-doc/html/libvips/compiled-language-which-can-call-c.html
--share/gtk-doc/html/libvips/cropping.html
--share/gtk-doc/html/libvips/documentation.html
--share/gtk-doc/html/libvips/dynamic-langauge-without-ffi.html
--share/gtk-doc/html/libvips/dynamic-language-with-ffi.html
- share/gtk-doc/html/libvips/extending.html
- share/gtk-doc/html/libvips/file-format.html
--share/gtk-doc/html/libvips/final-suggestion.html
--share/gtk-doc/html/libvips/full-decompression.html
- share/gtk-doc/html/libvips/func-list.html
--share/gtk-doc/html/libvips/gobject-introspection.html
- share/gtk-doc/html/libvips/home.png
- share/gtk-doc/html/libvips/index.html
- share/gtk-doc/html/libvips/interconvert.png
-@@ -140,6 +129,7 @@
- share/gtk-doc/html/libvips/libvips-draw.html
- share/gtk-doc/html/libvips/libvips-error.html
- share/gtk-doc/html/libvips/libvips-freqfilt.html
-+share/gtk-doc/html/libvips/libvips-from-C++.html
- share/gtk-doc/html/libvips/libvips-generate.html
- share/gtk-doc/html/libvips/libvips-header.html
- share/gtk-doc/html/libvips/libvips-histogram.html
-@@ -155,22 +145,14 @@
- share/gtk-doc/html/libvips/libvips-version.html
- share/gtk-doc/html/libvips/libvips-vips.html
- share/gtk-doc/html/libvips/libvips.devhelp2
--share/gtk-doc/html/libvips/linear-light.html
--share/gtk-doc/html/libvips/looping.html
- share/gtk-doc/html/libvips/object-tree.html
--share/gtk-doc/html/libvips/output-directory.html
--share/gtk-doc/html/libvips/output-format-and-options.html
- share/gtk-doc/html/libvips/owl.jpg
--share/gtk-doc/html/libvips/random-access-via-load-library.html
- share/gtk-doc/html/libvips/right-insensitive.png
- share/gtk-doc/html/libvips/right.png
--share/gtk-doc/html/libvips/sequential-access.html
- share/gtk-doc/html/libvips/style.css
--share/gtk-doc/html/libvips/thumbnail-size.html
- share/gtk-doc/html/libvips/tn_owl.jpg
- share/gtk-doc/html/libvips/up-insensitive.png
- share/gtk-doc/html/libvips/up.png
- share/gtk-doc/html/libvips/using-cli.html
- share/gtk-doc/html/libvips/using-from-c.html
--share/gtk-doc/html/libvips/using-from-cpp.html
- share/gtk-doc/html/libvips/using-threads.html
---- patches/patch-libvips_include_vips_dispatch_h.orig	Fri Mar 11 13:22:46 2022
-+++ patches/patch-libvips_include_vips_dispatch_h	Sun Dec 11 19:38:49 2022
+Index: patches/patch-libvips_include_vips_dispatch_h
+===================================================================
+RCS file: patches/patch-libvips_include_vips_dispatch_h
+diff -N patches/patch-libvips_include_vips_dispatch_h
+--- patches/patch-libvips_include_vips_dispatch_h	11 Mar 2022 19:22:46 -0000	1.2
++++ /dev/null	1 Jan 1970 00:00:00 -0000
 @@ -1,22 +0,0 @@
 -From cfe50903dffd576f6c25b0f24882b38a38085644 Mon Sep 17 00:00:00 2001
 -From: John Cupitt <jcupitt@gmail.com>
@@ -159,8 +64,12 @@
 - #include <vips/vips.h>
 - #include <vips/util.h>
 - 
---- patches/patch-libvips_include_vips_vips_h.orig	Fri Mar 11 13:22:46 2022
-+++ patches/patch-libvips_include_vips_vips_h	Sun Dec 11 19:38:55 2022
+Index: patches/patch-libvips_include_vips_vips_h
+===================================================================
+RCS file: patches/patch-libvips_include_vips_vips_h
+diff -N patches/patch-libvips_include_vips_vips_h
+--- patches/patch-libvips_include_vips_vips_h	11 Mar 2022 19:22:46 -0000	1.2
++++ /dev/null	1 Jan 1970 00:00:00 -0000
 @@ -1,27 +0,0 @@
 -From cfe50903dffd576f6c25b0f24882b38a38085644 Mon Sep 17 00:00:00 2001
 -From: John Cupitt <jcupitt@gmail.com>
@@ -189,3 +98,127 @@
 - 
 - /* If we're being parsed by SWIG, remove gcc attributes.
 -  */
+Index: pkg/PLIST
+===================================================================
+RCS file: /cvs/ports/graphics/libvips/pkg/PLIST,v
+retrieving revision 1.2
+diff -u -p -u -p -r1.2 PLIST
+--- pkg/PLIST	11 Mar 2022 19:22:46 -0000	1.2
++++ pkg/PLIST	12 Dec 2022 15:31:35 -0000
+@@ -4,7 +4,7 @@ bin/batch_rubber_sheet
+ bin/light_correct
+ bin/shrink_width
+ @bin bin/vips
+-bin/vips-8.9
++bin/vips-8.13
+ @bin bin/vipsedit
+ @bin bin/vipsheader
+ bin/vipsprofile
+@@ -14,11 +14,11 @@ include/vips/VConnection8.h
+ include/vips/VError8.h
+ include/vips/VImage8.h
+ include/vips/VInterpolate8.h
++include/vips/VRegion8.h
+ include/vips/almostdeprecated.h
+ include/vips/arithmetic.h
+ include/vips/basic.h
+ include/vips/buf.h
+-include/vips/cimg_funcs.h
+ include/vips/colour.h
+ include/vips/connection.h
+ include/vips/conversion.h
+@@ -53,7 +53,6 @@ include/vips/region.h
+ include/vips/resample.h
+ include/vips/sbuf.h
+ include/vips/semaphore.h
+-include/vips/soname.h
+ include/vips/thread.h
+ include/vips/threadpool.h
+ include/vips/transform.h
+@@ -62,7 +61,6 @@ include/vips/util.h
+ include/vips/vector.h
+ include/vips/version.h
+ include/vips/video.h
+-include/vips/vips-operators.h
+ include/vips/vips.h
+ include/vips/vips7compat.h
+ include/vips/vips8
+@@ -86,16 +84,16 @@ lib/pkgconfig/vips.pc
+ share/gtk-doc/
+ share/gtk-doc/html/
+ share/gtk-doc/html/libvips/
+-share/gtk-doc/html/libvips/Cite.md.html
++share/gtk-doc/html/libvips/Cite.html
+ share/gtk-doc/html/libvips/Combine.png
+-share/gtk-doc/html/libvips/Examples.md.html
+-share/gtk-doc/html/libvips/How-it-opens-files.md.html
+-share/gtk-doc/html/libvips/How-it-works.md.html
+-share/gtk-doc/html/libvips/Making-image-pyramids.md.html
++share/gtk-doc/html/libvips/Examples.html
++share/gtk-doc/html/libvips/How-it-opens-files.html
++share/gtk-doc/html/libvips/How-it-works.html
++share/gtk-doc/html/libvips/Making-image-pyramids.html
+ share/gtk-doc/html/libvips/Memtrace.png
+ share/gtk-doc/html/libvips/Sequence.png
+ share/gtk-doc/html/libvips/Sink.png
+-share/gtk-doc/html/libvips/Using-vipsthumbnail.md.html
++share/gtk-doc/html/libvips/Using-vipsthumbnail.html
+ share/gtk-doc/html/libvips/Vips-smp.png
+ share/gtk-doc/html/libvips/VipsForeignSave.html
+ share/gtk-doc/html/libvips/VipsImage.html
+@@ -108,23 +106,14 @@ share/gtk-doc/html/libvips/VipsTargetCus
+ share/gtk-doc/html/libvips/VipsThreadState.html
+ share/gtk-doc/html/libvips/annotation-glossary.html
+ share/gtk-doc/html/libvips/api-index-full.html
+-share/gtk-doc/html/libvips/binding.md.html
++share/gtk-doc/html/libvips/binding.html
+ share/gtk-doc/html/libvips/ch01.html
+ share/gtk-doc/html/libvips/ch02.html
+ share/gtk-doc/html/libvips/ch03.html
+ share/gtk-doc/html/libvips/ch04.html
+-share/gtk-doc/html/libvips/colour-management.html
+-share/gtk-doc/html/libvips/compiled-language-which-can-call-c.html
+-share/gtk-doc/html/libvips/cropping.html
+-share/gtk-doc/html/libvips/documentation.html
+-share/gtk-doc/html/libvips/dynamic-langauge-without-ffi.html
+-share/gtk-doc/html/libvips/dynamic-language-with-ffi.html
+ share/gtk-doc/html/libvips/extending.html
+ share/gtk-doc/html/libvips/file-format.html
+-share/gtk-doc/html/libvips/final-suggestion.html
+-share/gtk-doc/html/libvips/full-decompression.html
+ share/gtk-doc/html/libvips/func-list.html
+-share/gtk-doc/html/libvips/gobject-introspection.html
+ share/gtk-doc/html/libvips/home.png
+ share/gtk-doc/html/libvips/index.html
+ share/gtk-doc/html/libvips/interconvert.png
+@@ -140,6 +129,7 @@ share/gtk-doc/html/libvips/libvips-creat
+ share/gtk-doc/html/libvips/libvips-draw.html
+ share/gtk-doc/html/libvips/libvips-error.html
+ share/gtk-doc/html/libvips/libvips-freqfilt.html
++share/gtk-doc/html/libvips/libvips-from-C++.html
+ share/gtk-doc/html/libvips/libvips-generate.html
+ share/gtk-doc/html/libvips/libvips-header.html
+ share/gtk-doc/html/libvips/libvips-histogram.html
+@@ -155,22 +145,14 @@ share/gtk-doc/html/libvips/libvips-util.
+ share/gtk-doc/html/libvips/libvips-version.html
+ share/gtk-doc/html/libvips/libvips-vips.html
+ share/gtk-doc/html/libvips/libvips.devhelp2
+-share/gtk-doc/html/libvips/linear-light.html
+-share/gtk-doc/html/libvips/looping.html
+ share/gtk-doc/html/libvips/object-tree.html
+-share/gtk-doc/html/libvips/output-directory.html
+-share/gtk-doc/html/libvips/output-format-and-options.html
+ share/gtk-doc/html/libvips/owl.jpg
+-share/gtk-doc/html/libvips/random-access-via-load-library.html
+ share/gtk-doc/html/libvips/right-insensitive.png
+ share/gtk-doc/html/libvips/right.png
+-share/gtk-doc/html/libvips/sequential-access.html
+ share/gtk-doc/html/libvips/style.css
+-share/gtk-doc/html/libvips/thumbnail-size.html
+ share/gtk-doc/html/libvips/tn_owl.jpg
+ share/gtk-doc/html/libvips/up-insensitive.png
+ share/gtk-doc/html/libvips/up.png
+ share/gtk-doc/html/libvips/using-cli.html
+ share/gtk-doc/html/libvips/using-from-c.html
+-share/gtk-doc/html/libvips/using-from-cpp.html
+ share/gtk-doc/html/libvips/using-threads.html
