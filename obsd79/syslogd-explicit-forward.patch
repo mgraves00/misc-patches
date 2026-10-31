@@ -1,0 +1,46 @@
+diff --git a/usr.sbin/syslogd/syslogd.c b/usr.sbin/syslogd/syslogd.c
+index dfa741c..e87c991 100644
+--- a/usr.sbin/syslogd/syslogd.c
++++ b/usr.sbin/syslogd/syslogd.c
+@@ -1807,7 +1807,8 @@ void
+ logmsg(struct msg *msg, int flags, char *from)
+ {
+ 	struct filed *f;
+-	int fac, msglen, prilev;
++	int fac, msglen, prilev, q_flag;
++	char *q_name;
+ 
+ 	(void)gettimeofday(&now, NULL);
+ 	log_debug("logmsg: pri 0%o, flags 0x%x, from %s, prog %s, msg %s",
+@@ -1836,8 +1837,18 @@ logmsg(struct msg *msg, int flags, char *from)
+ 		return;
+ 	}
+ 	/* log the message to the particular outputs */
++	q_flag = 0;
++	q_name = NULL;
+ 	msglen = strlen(msg->m_msg);
+ 	SIMPLEQ_FOREACH(f, &Files, f_next) {
++		/* check to see if previous match is quick and name matches current prog/host */
++		if (q_flag) {
++			/* if no match then we're at the end of the quick match... so abort */
++			if (!(f->f_program != NULL && strncasecmp(q_name, f->f_program, strlen(q_name)) == 0)  &&
++			    !(f->f_hostname != NULL && strncasecmp(q_name, f->f_hostname, strlen(q_name)) == 0) ) {
++				break;
++			}
++		}
+ 		/* skip messages that are incorrect priority */
+ 		if (f->f_pmask[fac] < prilev ||
+ 		    f->f_pmask[fac] == INTERNAL_NOPRI)
+@@ -1905,8 +1916,10 @@ logmsg(struct msg *msg, int flags, char *from)
+ 			}
+ 		}
+ 
+-		if (f->f_quick)
+-			break;
++		if (f->f_quick) {
++			q_flag = 1;
++			q_name = f->f_program != NULL ? f->f_program : (f->f_hostname != NULL ? f->f_hostname : NULL);
++		}
+ 	}
+ }
+ 
